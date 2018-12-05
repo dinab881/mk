@@ -1,7 +1,7 @@
 <div class="container">
     <div id="answer"></div>
     <button class="btn btn-default" id="send">Button</button>
-    <?php new \vendor\widgets\menu\Menu(
+    <?php new \fw\widgets\menu\Menu(
         [
             'tpl' => WWW . '/menu/select.php',
             'container' => 'select',
@@ -12,7 +12,7 @@
             'enableCache' => false
         ]
     ); ?>
-    <?php new \vendor\widgets\menu\Menu(
+    <?php new \fw\widgets\menu\Menu(
         [
             'tpl' => WWW . '/menu/my_menu.php',
             'container' => 'ul',

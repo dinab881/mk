@@ -6,7 +6,7 @@
  * Time: 11:00
  */
 
-namespace vendor\libs;
+namespace fw\libs;
 
 
 class Cache

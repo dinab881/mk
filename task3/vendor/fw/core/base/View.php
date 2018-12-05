@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 03.12.18
- * Time: 12:09
- */
-
-namespace vendor\core\base;
+namespace fw\core\base;
 
 
 class View

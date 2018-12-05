@@ -1,5 +1,5 @@
 <?php
-use vendor\core\Router;
+use fw\core\Router;
 
 //determine the part the string after the ?
 $query = rtrim($_SERVER['QUERY_STRING'], '/');
@@ -9,32 +9,33 @@ $query = rtrim($_SERVER['QUERY_STRING'], '/');
  * */
 define('DEBUG', 1);
 define('WWW', __DIR__);
-define('CORE', dirname(__DIR__) . '/vendor/core');
+define('CORE', dirname(__DIR__) . '/vendor/fw/core');
 define('ROOT', dirname(__DIR__));
 define('APP', dirname(__DIR__) . '/app');
 define('CACHE', dirname(__DIR__) . '/tmp/cache');
-define('LIBS', dirname(__DIR__) . '/vendor/libs');
+define('LIBS', dirname(__DIR__) . '/vendor/fw/libs');
 define('LAYOUT', 'default');
 
 
 
 //require '../vendor/core/Router.php';
-require '../vendor/libs/functions.php';
+require '../vendor/fw/libs/functions.php';
+require __DIR__.'/../vendor/autoload.php';
 /*require '../app/controllers/Main.php';
 require '../app/controllers/Posts.php';
 require '../app/controllers/PostsNew.php';*/
 
 //debug($_GET);
-
+/*
 spl_autoload_register(function ($class) {
    $file = ROOT .'/'.str_replace('\\', '/', $class). '.php';
     //$file = APP . "/controllers/$class.php";
     if (is_file($file)) {
         require_once $file;
     }
-});
+});*/
 
-new \vendor\core\App;
+new \fw\core\App;
 /*Router::add('posts/add', ['controller' => 'Posts', 'action' => 'add']);
 Router::add('posts', ['controller' => 'Posts', 'action' => 'index']);
 Router::add('', ['controller' => 'Main', 'action' => 'index']);*/
@@ -58,4 +59,4 @@ if (Router::matchRoute($query)) {
     echo '404';
 }*/
 
-vendor\core\Router::dispatch($query);
+fw\core\Router::dispatch($query);

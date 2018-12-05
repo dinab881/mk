@@ -1,5 +1,5 @@
 <?php
-namespace vendor\core;
+namespace fw\core;
 class Db
 {
     use TSingleton;
@@ -11,7 +11,7 @@ class Db
     protected function __construct()
     {
         $db = require ROOT . '/config/config_db.php';
-        require LIBS. '/rb.php';
+        require LIBS . '/rb.php';
 
         \R::setup($db['dsn'], $db['user'], $db['pass']);
         \R::freeze(true);

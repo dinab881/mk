@@ -1,3 +1,6 @@
 /.idea
 /task3/tmp/cache/*
 *.log
+/task3/vendor/*
+!/task3/vendor/fw
+/task3/composer.lock
