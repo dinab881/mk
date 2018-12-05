@@ -12,7 +12,8 @@ class MainController extends AppController
     {
         $model = new Main;
         //\R::fancyDebug(true);
-
+        //trigger_error('E_USER_ERROR', E_USER_ERROR);
+        //echo $tes;
         $posts = \R::findAll('posts');
         $post = \R::findOne('posts', 'id = 1');
         //debug($post);
@@ -46,7 +47,10 @@ class MainController extends AppController
     {
         if ($this->isAjax()) {
             $model = new Main();
-            $post = \R::findOne('posts', "id = {$_POST['id']}");
+
+            //$data = ['answer' => 'Response from server', 'code' => 200];
+           // echo json_encode($data);
+           $post = \R::findOne('posts', "id = {$_POST['id']}");
             /*
              * Для каждого из переданного параметров, функция compact() ищет переменную
              * с указанным именем в текущей таблице символов и добавляет их в выводимый массив так,
@@ -54,7 +58,7 @@ class MainController extends AppController
              * она обратна функции extract()
              *
              * */
-            $this->loadView('_test', compact('post'));
+           $this->loadView('_test', compact('post'));
             die;
         }
         echo 222;
