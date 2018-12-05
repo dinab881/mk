@@ -2,14 +2,16 @@
 namespace app\controllers;
 
 use app\models\Main;
-use vendor\core\App;
-use vendor\core\base\View;
+use fw\core\App;
+use fw\core\base\View;
 
 class MainController extends AppController
 {
     //public $layout = 'main';
     public function indexAction()
     {
+        // create a log channel
+
         $model = new Main;
         //\R::fancyDebug(true);
         //trigger_error('E_USER_ERROR', E_USER_ERROR);

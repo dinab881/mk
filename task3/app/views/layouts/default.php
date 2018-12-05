@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php \vendor\core\base\View::getMeta()?>
+    <?php \fw\core\base\View::getMeta()?>
 
     <!-- Bootstrap -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -19,20 +19,20 @@
 </head>
 <body>
 <div class="container">
-    <?php if(!empty($menu)): ?>
     <ul class="nav nav-pills">
-        <?php foreach ($menu as $item): ?>
-            <li><a href="category/<?= $item['id'] ?>"><?= $item['title'] ?></a></li>
-        <?php endforeach; ?>
+        <li><a href="/">Home</a></li>
+        <li><a href="/page/about">About</a></li>
+        <li><a href="/admin">Admin</a></li>
+
     </ul>
-    <?php endif ?>
+
     <h1>Hello, world!</h1>
     <?= $content ?>
 
 </div>
 
-<?= debug(\vendor\core\Db::$countsql) ?>
-<?= debug(\vendor\core\Db::$queries) ?>
+<?= debug(\fw\core\Db::$countsql) ?>
+<?= debug(\fw\core\Db::$queries) ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->

@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 03.12.18
- * Time: 12:58
- */
-
 namespace app\controllers;
 
-class AppController extends \vendor\core\base\Controller
+class AppController extends \fw\core\base\Controller
 {
     public $menu;
     public $meta = [];

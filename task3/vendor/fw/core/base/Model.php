@@ -1,14 +1,7 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 03.12.18
- * Time: 16:33
- */
+namespace fw\core\base;
 
-namespace vendor\core\base;
-
-use vendor\core\Db;
+use fw\core\Db;
 
 //why abstract class ? - you can't create object of this class?
 abstract class Model
