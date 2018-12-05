@@ -7,7 +7,7 @@ $query = rtrim($_SERVER['QUERY_STRING'], '/');
 /*
  * CONSTANTS
  * */
-define('DEBUG', 0);
+define('DEBUG', 1);
 define('WWW', __DIR__);
 define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));
