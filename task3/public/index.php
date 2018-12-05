@@ -17,6 +17,7 @@ define('LIBS', dirname(__DIR__) . '/vendor/libs');
 define('LAYOUT', 'default');
 
 
+
 //require '../vendor/core/Router.php';
 require '../vendor/libs/functions.php';
 /*require '../app/controllers/Main.php';
@@ -42,8 +43,12 @@ Router::add('', ['controller' => 'Main', 'action' => 'index']);*/
 Router::add('^page/(?P<alias>[a-z-]+)$', ['controller' => 'Page', 'action' => 'view']);
 
 //default routes
+Router::add('^admin$', ['controller' => 'User', 'action' => 'index', 'prefix' => 'admin']);
+Router::add('^admin/?(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$', ['prefix' => 'admin']);
+
 Router::add('^$', ['controller' => 'Main', 'action' => 'index']);
 Router::add('^(?P<controller>[a-z-]+)/?(?P<action>[a-z-]+)?$');
+
 //debug(Router::getRoutes());
 
 /*

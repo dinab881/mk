@@ -51,13 +51,13 @@ class View
         if (is_array($vars)) {
             extract($vars);
         }
-
-        $file_view = APP . "/views/{$this->route['controller']}/{$this->view}.php";
+        $delimiter = str_replace('\\', '/', $this->route['prefix']);
+        $file_view = APP . "/views/{$delimiter}{$this->route['controller']}/{$this->view}.php";
         ob_start();
         if (is_file($file_view)) {
             require $file_view;
         } else {
-            echo "<p>View is not found <b>$file_view</b></p>";
+            throw new \Exception("<p>View is not found <b>$file_view</b></p>", 404);
         }
         $content = ob_get_clean();
 
@@ -72,7 +72,7 @@ class View
                 }
                 require $file_layout;
             } else {
-                echo "<p>layout is not found <b>$file_layout</b></p>";
+                throw new \Exception("<p>layout is not found <b>$file_layout</b></p>", 404);
             }
         }
 
