@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 04.12.18
- * Time: 12:07
- */
-
 namespace vendor\core;
 
 class App
@@ -15,5 +8,6 @@ class App
     public function __construct()
     {
         self::$app = Registry::instance();
+        new ErrorHandler();
     }
 }

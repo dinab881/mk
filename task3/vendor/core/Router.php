@@ -1,11 +1,5 @@
 <?php
 namespace vendor\core;
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 02.12.18
- * Time: 16:02
- */
 class Router
 {
     protected static $routes = []; //table of routes
@@ -46,8 +40,8 @@ class Router
             echo '<br/>------------------<br/>';*/
 
             if (preg_match("#$pattern#i", $url, $matches)) {
-               /* print_r('<b>Matches: </b>');
-                print_r($matches);*/
+                /* print_r('<b>Matches: </b>');
+                 print_r($matches);*/
                 foreach ($matches as $k => $v) {
                     //if key == 'controller' or key =='action'
                     if (is_string($k)) {
@@ -67,8 +61,7 @@ class Router
     /**
      * redirect URL to correct route
      * @param string $url income url
-     * @return void
-     *
+     * @throws \Exception
      */
     public static function dispatch($url)
     {
@@ -79,7 +72,7 @@ class Router
         $url = self::removeQueryString($url);
         if (self::matchRoute($url)) {
 
-            $controller = 'app\\controllers\\' . self::$route['controller']. 'Controller';
+            $controller = 'app\\controllers\\' . self::$route['controller'] . 'Controller';
             //debug(self::$route);
             if (class_exists($controller)) {
                 $cObj = new $controller(self::$route);
@@ -89,14 +82,16 @@ class Router
                     $cObj->$action();
                     $cObj->getView();
                 } else {
-                    echo "Method <b>$controller::$action</b> not found";
+                    throw new \Exception("Method <b>$controller::$action</b> not found", 404);
                 }
             } else {
-                echo 'Controller <b>' . $controller . '</b> not found';
+
+                throw new \Exception("Controller <b>' . $controller . '</b> not found", 404);
             }
         } else {
-            http_response_code(404);
-            include '404.html';
+            throw new \Exception("Page not found", 404);
+            //http_response_code(404);
+            //include '404.html';
         }
     }
 
@@ -120,13 +115,13 @@ class Router
         return lcfirst(self::upperCamelCase($name));
     }
 
-    protected static function removeQueryString($url){
-        if($url){
+    protected static function removeQueryString($url)
+    {
+        if ($url) {
             $params = explode('&', $url, 2);
-            if(false === strpos($params[0], '=')){
+            if (false === strpos($params[0], '=')) {
                 return rtrim($params[0], '/');
-            }
-            else{
+            } else {
                 return '';
             }
         }

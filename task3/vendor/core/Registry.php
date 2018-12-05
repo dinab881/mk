@@ -1,34 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 04.12.18
- * Time: 12:05
- */
-
 namespace vendor\core;
 
 
 class Registry
 {
+    use TSingleton;
     public static $objects = [];
-    protected static $instance;
+
 
     protected function __construct()
     {
-        require_once ROOT .'/config/config.php';
+        require_once ROOT . '/config/config.php';
         foreach ($config['components'] as $name => $component) {
             self::$objects[$name] = new $component;
         }
     }
 
-    public static function instance()
-    {
-        if (self::$instance == null) {
-            self::$instance = new self;
-        }
-        return self::$instance;
-    }
 
     public function __get($name)
     {

@@ -3,26 +3,17 @@ namespace app\controllers;
 
 use app\models\Main;
 use vendor\core\App;
+use vendor\core\base\View;
 
 class MainController extends AppController
 {
     //public $layout = 'main';
     public function indexAction()
     {
-        //App::$app->getList();
         $model = new Main;
-        \R::fancyDebug(true);
-        $posts = App::$app->cache->get('posts');
-        if(!$posts){
-            $posts = \R::findAll('posts');
-            App::$app->cache->set('posts', $posts, 3600*24);
-        }
+        //\R::fancyDebug(true);
 
-
-
-        echo date('Y-m-d H:i', time());
-        echo '<br>';
-        echo date('Y-m-d H:i', 1544007123);
+        $posts = \R::findAll('posts');
         $post = \R::findOne('posts', 'id = 1');
         //debug($post);
         $menu = $this->menu;
@@ -44,15 +35,29 @@ class MainController extends AppController
          ];*/
         $title = 'PAGE TITLE';
         //$this->setMeta('Main page', 'Description', 'Keywords');
-        $this->setMeta($post->title, $post->description, $post->keywords);
-        $meta =$this->meta;
+        //$this->setMeta($post->title, $post->description, $post->keywords);
+        //$meta = $this->meta;
         //Создать массив, содержащий названия переменных и их значения
+        View::setMeta('Main page', 'Page description', 'Keywords');
         $this->set(compact('title', 'posts', 'menu', 'meta'));
     }
 
     public function testAction()
     {
-        debug($this->route);
-        $this->layout = 'test';
+        if ($this->isAjax()) {
+            $model = new Main();
+            $post = \R::findOne('posts', "id = {$_POST['id']}");
+            /*
+             * Для каждого из переданного параметров, функция compact() ищет переменную
+             * с указанным именем в текущей таблице символов и добавляет их в выводимый массив так,
+             * что имя переменной становится ключом, а содержимое переменной становится значением этого ключа
+             * она обратна функции extract()
+             *
+             * */
+            $this->loadView('_test', compact('post'));
+            die;
+        }
+        echo 222;
+        //$this->layout = false;
     }
 }

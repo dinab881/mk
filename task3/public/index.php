@@ -1,12 +1,4 @@
 <?php
-error_reporting(-1);
-/**
- * Created by PhpStorm.
- * User: dina
- * Date: 02.12.18
- * Time: 15:08
- */
-
 use vendor\core\Router;
 
 //determine the part the string after the ?
@@ -15,6 +7,7 @@ $query = rtrim($_SERVER['QUERY_STRING'], '/');
 /*
  * CONSTANTS
  * */
+define('DEBUG', 0);
 define('WWW', __DIR__);
 define('CORE', dirname(__DIR__) . '/vendor/core');
 define('ROOT', dirname(__DIR__));
@@ -22,6 +15,7 @@ define('APP', dirname(__DIR__) . '/app');
 define('CACHE', dirname(__DIR__) . '/tmp/cache');
 define('LIBS', dirname(__DIR__) . '/vendor/libs');
 define('LAYOUT', 'default');
+
 
 //require '../vendor/core/Router.php';
 require '../vendor/libs/functions.php';
