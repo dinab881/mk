@@ -42,16 +42,28 @@ class Router
             if (preg_match("#$pattern#i", $url, $matches)) {
                 /* print_r('<b>Matches: </b>');
                  print_r($matches);*/
+
                 foreach ($matches as $k => $v) {
                     //if key == 'controller' or key =='action'
                     if (is_string($k)) {
                         $route[$k] = $v;
                     }
                 }
+
                 if (!isset($route['action']))
                     $route['action'] = 'index';
+
+                //prefix for admin controllers
+                if (!isset($route['prefix'])) {
+                    $route['prefix'] = '';
+                } else {
+                    $route['prefix'] .= '\\';
+                }
+
+
                 $route['controller'] = self::upperCamelCase($route['controller']);
                 self::$route = $route;
+
                 return true;
             }
         }
@@ -72,8 +84,8 @@ class Router
         $url = self::removeQueryString($url);
         if (self::matchRoute($url)) {
 
-            $controller = 'app\\controllers\\' . self::$route['controller'] . 'Controller';
-            //debug(self::$route);
+            $controller = 'app\\controllers\\' . self::$route['prefix'] . self::$route['controller'] . 'Controller';
+
             if (class_exists($controller)) {
                 $cObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
