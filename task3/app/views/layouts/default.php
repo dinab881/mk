@@ -24,15 +24,28 @@
         <li><a href="/page/about">About</a></li>
         <li><a href="/admin">Admin</a></li>
 
+        <li><a href="/user/signup">Signup</a></li>
+        <li><a href="/user/login">Login</a></li>
+        <li><a href="/user/logout">Logout</a></li>
     </ul>
 
     <h1>Hello, world!</h1>
+    <?php if(isset($_SESSION['error'])): ?>
+        <div class="alert alert-danger">
+            <?= $_SESSION['error'] ; unset($_SESSION['error'] )?>
+        </div>
+    <?php endif; ?>
+
+    <?php if(isset($_SESSION['success'])): ?>
+        <div class="alert alert-success">
+            <?= $_SESSION['success'] ; unset($_SESSION['success'] )?>
+        </div>
+    <?php endif; ?>
+<?php debug($_SESSION); ?>
     <?= $content ?>
 
 </div>
 
-<?= debug(\fw\core\Db::$countsql) ?>
-<?= debug(\fw\core\Db::$queries) ?>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
