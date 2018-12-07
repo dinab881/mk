@@ -70,9 +70,9 @@ class View
         $file_view = APP . "/views/{$delimiter}{$this->route['controller']}/{$this->view}.php";
 
         // ob_start([$this, 'compressPage']);
-        ob_start('ob_gzhandler');
+        ob_start(/*'ob_gzhandler'*/);
         {
-            header("Content-Encoding: gzip");
+            //header("Content-Encoding: gzip");
             if (is_file($file_view)) {
                 require $file_view;
             } else {
@@ -124,6 +124,17 @@ class View
         self::$meta['desc'] = $desc;
         self::$meta['keywords'] = $keywords;
 
+    }
+
+    public function getPart($file)
+    {
+        $file = APP . "/views/{$file}.php";
+
+        if (is_file($file)) {
+            require_once $file;
+        } else {
+            echo "File {$file} not found...";
+        }
     }
 
 }
