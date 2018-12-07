@@ -1,6 +1,10 @@
 <?php
 namespace app\controllers;
 
+
+use fw\core\App;
+use fw\widgets\language\Language;
+
 class AppController extends \fw\core\base\Controller
 {
     public $menu;
@@ -13,7 +17,9 @@ class AppController extends \fw\core\base\Controller
             echo '<h1>Words only for main controller</h1>';
         }*/
         new \app\models\Main;
-        $this->menu = \R::findAll('category');
+        App::$app->setProperty('langs', Language::getLanguages());
+        App::$app->setProperty('lang', Language::getLanguage(App::$app->getProperty('langs')));
+        //debug(App::$app->getProperties());
     }
 
     protected function setMeta($title = '', $desc = '', $keywords = '')

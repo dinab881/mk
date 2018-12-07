@@ -2,6 +2,8 @@
 namespace fw\core\base;
 
 
+use fw\core\App;
+
 class View
 {
     /**
@@ -63,6 +65,8 @@ class View
 
     public function render($vars)
     {
+        Lang::load(App::$app->getProperty('lang'), $this->route);
+
         if (is_array($vars)) {
             extract($vars);
         }
