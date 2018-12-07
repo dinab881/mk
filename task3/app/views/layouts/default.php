@@ -41,7 +41,7 @@
             <?= $_SESSION['success'] ; unset($_SESSION['success'] )?>
         </div>
     <?php endif; ?>
-<?php debug($_SESSION); ?>
+
     <?= $content ?>
 
 </div>
